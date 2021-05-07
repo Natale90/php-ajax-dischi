@@ -61,27 +61,28 @@
             .catch(() => console.log('error'))
           },
 
-          // methods:{
-          //
-          //   filtredByGenre: function(){
-          //
-          //     axios.get('data.php',{
-          //
-          //       params:{
-          //         genre: this.selectedGenre,
-          //       }
-          //     })
-          //
-          //     .then(r => {
-          //       this.collection = r.data;
-          //
-          //     })
-          //
-          //     .catch(() => console.log('error'))
-          //   }
-          //
-          //
-          // },//end of methods
+          methods:{
+
+            filtredByGenre: function(){
+
+              axios.get('data.php',{
+
+                params:{
+                  genre: this.selectedGenre,
+                }
+              })
+
+              .then(rFiltered => {
+                this.collection = rFiltered.data;
+
+
+              })
+
+              .catch(() => console.log('error'))
+            }
+
+
+          },//end of methods
 
           computed:{
 
@@ -129,9 +130,9 @@
       <div class="selection">
 
         <label for="">seleziona un genere</label>
-        <select v-model='selectedGenre' class="" name="">
-          <option value=""></option>
-          <option v-for='genre in getMusicGenre' :value="genre">{{genre}}</option>
+        <select @click='filtredByGenre' v-model='selectedGenre' class="" name="">
+          <option value="">All</option>
+          <option  v-for='genre in getMusicGenre' :value="genre">{{genre}}</option>
         </select>
 
       </div>

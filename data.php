@@ -77,5 +77,36 @@
     ];
 
 
-    echo json_encode($db);
+
+    $genre = strtolower($_GET['genre']);
+    if($genre == null || $genre == all){
+
+      echo json_encode($db);
+    } else {
+      $neweArr = [];
+
+      for($i=0;$i<count($db);$i++){
+
+        $OneAlbum = $db[$i];
+        $oneGenre = strtolower($OneAlbum['genre']);
+        // echo $oneGenre  . ' ';
+
+        if($oneGenre == $genre){
+
+          // echo 'match' . ' ' . '<br>';
+          $newArr []= $OneAlbum;
+
+        }
+      }
+
+      echo json_encode($newArr);
+    }
+
+
+    // filteredCollection($genre);
+
+
+    // ----------------------------------------
+
+    // // echo json_encode($db);
 ?>
