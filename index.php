@@ -46,6 +46,7 @@
           data:{
 
             collection: [],
+            newArrGenre: [],
             selectedGenre: null,
           },
 
@@ -56,7 +57,7 @@
             })
             .then(r => {
               this.collection = r.data;
-
+              this.newArrGenre = this.getMusicGenre();
             })
             .catch(() => console.log('error'))
           },
@@ -76,18 +77,16 @@
                 this.collection = rFiltered.data;
 
 
+
               })
 
               .catch(() => console.log('error'))
-            }
 
-
-          },//end of methods
-
-          computed:{
+            },
 
             getMusicGenre: function(){
               let arrGenre = [];
+
               for(let i=0;i<this.collection.length; i++){
 
                 let oneAlbum = this.collection[i];
@@ -97,10 +96,13 @@
                   arrGenre.push(genre);
                 }
               };
+
               return arrGenre;
+
             },
 
-          },//end of computed
+
+          },//end of methods
 
 
         });
@@ -112,6 +114,7 @@
         initVue();
 
       };
+      
       document.addEventListener('DOMContentLoaded', init);
 
 
@@ -132,7 +135,7 @@
         <label for="">seleziona un genere</label>
         <select @click='filtredByGenre' v-model='selectedGenre' class="" name="">
           <option value="">All</option>
-          <option  v-for='genre in getMusicGenre' :value="genre">{{genre}}</option>
+          <option  v-for='genre in newArrGenre' :value="genre">{{genre}}</option>
         </select>
 
       </div>
